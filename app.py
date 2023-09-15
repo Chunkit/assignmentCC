@@ -50,7 +50,7 @@ def viewStudentInfoDetails(stud_id):
     cursor.execute(statement, (stud_id))
     result = cursor.fetchall()
 
-    return render_template('viewStudentInfoDetails.html', student=result)
+    return render_template('viewStudentInfoDetails.html', data=result)
 
 @app.route('/editStudentInfoDetails.html/<int:stud_id>')
 def edit_internship(internship_id):
