@@ -6,8 +6,8 @@ import boto3
 customhost = "internshipdatabase.cpkr5ofaey5p.us-east-1.rds.amazonaws.com"
 customuser = "admin"
 custompass = "admin123"
-customdb = "internshipDB"
-custombucket = "KwoChunKit-internship"
+customdb = "internshipdb"
+custombucket = "bucket-internship"
 customregion = "us-east-1"
 
 
