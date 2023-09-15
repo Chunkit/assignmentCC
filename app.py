@@ -36,9 +36,9 @@ def viewStudentInfoByCohort():
 
 @app.route("/viewStudentInfo", methods=['GET'])
 def viewStudentInfo():
-    statement = "SELECT * FROM Student WHERE stud_id = %s"
+    statement = "SELECT * FROM Student
     cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_id))
+    cursor.execute(statement)
     result = cursor.fetchone()
     return render_template('viewStudentInfo.html')
 
