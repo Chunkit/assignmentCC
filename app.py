@@ -42,7 +42,7 @@ def viewStudentInfo():
     result = cursor.fetchall()
     return render_template('viewStudentInfo.html', data=result)
 
-@app.route('/viewStudentInfoDetails/<String:stud_id>')
+@app.route('/viewStudentInfoDetails/<stud_id>')
 def viewStudentInfoDetails(stud_id):
 
     statement = "SELECT * FROM Student WHERE stud_id = %s"
