@@ -39,7 +39,7 @@ def viewStudentInfo():
     statement = "SELECT * FROM Student"
     cursor = db_conn.cursor()
     cursor.execute(statement)
-    result = cursor.fetchone()
+    result = cursor.fetchall()
     return render_template('viewStudentInfo.html', data=result)
 
 @app.route('/viewStudentInfoDetails/<int:stud_id>')
