@@ -102,19 +102,19 @@
                     <div class="col-1g-12 col-md-8 section-top-border">
                         <h3 class="text-heading mb-30">View Student</h3>
                         
-                        <form action="#" id="viewIntern">
+                        <form action="#" id="viewStudentInfoDetails">
 
                             <div class="mt-10"><!--Student ID-->
-                                <span class="single-input">{{ intern[?] }}</span>
+                                <span class="single-input">{{ student[0] }}</span>
                             </div>
 
                             <div class="mt-10"><!--IC-->
-                                <span class="single-input">{{ intern[?] }}</span>
+                                <span class="single-input">{{ student[2] }}</span>
                             </div>
 
                             <div class="mt-10"> <!--Programme-->
                                 <span class="single-input"><i class="fa fa-home" aria-hidden="true"></i>
-                                        {% if intern[?] == "Yes" %}
+                                        {% if student[5] == "Yes" %}
                                     RSW
                                     {% else %}
                                     RDS
@@ -124,7 +124,7 @@
                 
                             <div class="mt-10"> <!--Group-->
                                 <span class="single-input"><i class="fa fa-home" aria-hidden="true"></i>
-                                        {% if intern[?] == "Yes" %}
+                                        {% if student[6] == "Yes" %}
                                     1
                                     {% else if %}
                                     2
@@ -145,12 +145,12 @@
                             </div>
 
                             <div class="mt-10"><!--CGPA-->
-                                <span class="single-input">{{ intern[?] }}</span>
+                                <span class="single-input">{{ student[7] }}</span>
                             </div>
 
                             <div class="mt-10"> <!--Intern Batch-->
                                 <span class="single-input"><i class="fa fa-home" aria-hidden="true"></i>
-                                        {% if intern[?] == "Yes" %}
+                                        {% if intern[8] == "Yes" %}
                                     JUL 2022 (Entry to Year 2)
                                     {% else if %}
                                     MAR 2022 (Entry to Year 2)
@@ -163,27 +163,27 @@
                             </div>
                 
                             <div class="mt-10"><!--Own Transport-->
-                                <span class="single-input">{{ intern[?] }}</span>
+                                <span class="single-input">{{ student[9] }}</span>
                             </div>
 
                             <div class="mt-10"><!--Current Address-->
-                                <span class="single-input">{{ intern[?] }}</span>
+                                <span class="single-input">{{ student[10] }}</span>
                             </div>
 
                             <div class="mt-10"><!--Contact No-->
-                                <span class="single-input">{{ intern[?] }}</span>
+                                <span class="single-input">{{ student[11] }}</span>
                             </div>
                 
                             <div class="mt-10"><!--Personal Email-->
-                                <span class="single-input">{{ intern[?] }}</span>
+                                <span class="single-input">{{ student[12] }}</span>
                             </div>
 
                             <div class="mt-10"><!--Home Address-->
-                                <span class="single-input">{{ intern[?] }}</span>
+                                <span class="single-input">{{ student[13] }}</span>
                             </div>
 
                             <div class="mt-10"><!--Home Phone-->
-                                <span class="single-input">{{ intern[?] }}</span>
+                                <span class="single-input">{{ student[14] }}</span>
                             </div>
                 
                             <div class="mt-10"><!--Resume-->
@@ -207,8 +207,8 @@
                         </div>
 
                         <div class="col-md-12 typography text-center">
-                            <h4 id="stud_name">Student Name</h4>
-                            <h6 id="email">XXX@gamil.com</h6>
+                            <h4 id="stud_name">{{student[1]}}</h4>
+                            <h6 id="email">{{student[3]}}</h6>
                         </div>
                   
                     </div>
