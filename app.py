@@ -44,9 +44,9 @@ def viewStudentInfo():
 
 @app.route('/viewStudentInfoDetails/<stud_ids>')
 def viewStudentInfoDetails(stud_ids):
-    statement = "SELECT * FROM Student WHERE stud_id = stud_ids"
+    statement = "SELECT * FROM Student s WHERE stud_ids = s.stud_id"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_id,))
+    cursor.execute(statement, (stud_ids,))
     result = cursor.fetchall()
 
     return render_template('viewStudentInfoDetails.html', student=result)
