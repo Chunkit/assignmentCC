@@ -3,7 +3,7 @@ from pymysql import connections
 import os
 import boto3
 
-customhost = "internshipdatabase.cpkr5ofaey5p.us-east-1.rds.amazonaws.com"
+customhost = "internshipdb.c9euwctn4e9a.us-east-1.rds.amazonaws.com"
 customuser = "admin"
 custompass = "admin123"
 customdb = "internshipDB"
