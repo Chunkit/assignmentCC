@@ -31,17 +31,16 @@ def home():
     return render_template('supervisorMainPage.html')
 
 @app.route("/viewStudentInfoByCohort", methods=['GET'])
-def viewStudentInfo():
+def viewStudentInfoByCohort():
+    return render_template('viewStudentInfoByCohort.html')
 
-    stud_id = 1
-    statement = "SELECT stud_id, stud_name FROM Student WHERE stud_id = %s"
+@app.route("/viewStudentInfo", methods=['GET'])
+def viewStudentInfo():
+    statement = "SELECT * FROM Student WHERE stud_id = %s"
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_id))
-
-    result = cursor.fetchall()
-    cursor.close()
-    
-    return render_template('viewStudentInfoByCohort.html', data=result)
+    result = cursor.fetchone()
+    return render_template('viewStudentInfo.html')
 
 @app.route('/viewStudentInfoDetails/<int:stud_id>')
 def view_internship(internship_id):
