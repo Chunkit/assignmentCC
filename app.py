@@ -44,7 +44,7 @@ def viewStudentInfo():
 
 @app.route('/viewStudentInfoDetails/<stud_id>')
 def viewStudentInfoDetails(stud_id):
-    statement = "SELECT * FROM Student s WHERE stud_id = s.stud_id"
+    statement = "SELECT * FROM Student s WHERE stud_id = %s"
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_id,))
     result = cursor.fetchall()
