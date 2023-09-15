@@ -48,7 +48,7 @@ def viewStudentInfoDetails(stud_id):
     statement = "SELECT * FROM Student WHERE stud_id = %s"
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_id))
-    result = cursor.fetchone()
+    result = cursor.fetchall()
 
     return render_template('viewStudentInfoDetails.html', student=result)
 
