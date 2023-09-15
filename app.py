@@ -42,15 +42,15 @@ def viewStudentInfo():
     result = cursor.fetchall()
     return render_template('viewStudentInfo.html', data=result)
 
-@app.route('/viewStudentInfoDetails/<int:stud_id>')
-def view_internship(internship_id):
+@app.route('/viewStudentInfoDetails/<String:stud_id>')
+def viewStudentInfoDetails(stud_id):
 
     statement = "SELECT * FROM Student WHERE stud_id = %s"
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_id))
     result = cursor.fetchone()
 
-    return render_template('viewStudentInfoDetails.html', intern=result)
+    return render_template('viewStudentInfoDetails.html', student=result)
 
 @app.route('/editStudentInfoDetails.html/<int:stud_id>')
 def edit_internship(internship_id):
