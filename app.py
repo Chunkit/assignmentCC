@@ -36,7 +36,7 @@ def viewStudentInfoByCohort():
 
 @app.route("/viewStudentInfo", methods=['GET'])
 def viewStudentInfo():
-    statement = "SELECT * FROM Student"
+    statement = "SELECT * FROM Student WHERE (SELECT sv_id FROM Supervisor WHERE sv_id='1')"
     cursor = db_conn.cursor()
     cursor.execute(statement)
     result = cursor.fetchall()
