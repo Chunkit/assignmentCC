@@ -107,100 +107,287 @@
             <div class="col-1g-12 col-md-8 section-top-border">
                 <h3 class="text-heading mb-30">Edit Student Info</h3>
 
-                <form action="#">
+                <form action="/updateIntern" autocomplete="on" method="POST" enctype="multipart/form-data">
 
                     <div class="mt-10">
-                        <input type="text" name="stud_ID" placeholder="Your student ID" required class="single-input"
-                            value="">
-                    </div>
-
-                    <div class="mt-10">
-                        <input type="text" name="ic" placeholder="Your IC" required class="single-input" value="">
-                    </div>
-
-                    <div class="input-group-icon mt-10">
-                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
-                        <div class="form-select" id="default-select" name="Programme">
-                            <select>
-                                <option value="1">RSW</option>
-                                <option value="2">RDS</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="input-group-icon mt-10">
-                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
-                        <div class="form-select" id="default-select" name="Programme">
-                            <select>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="1">3</option>
-                                <option value="2">4</option>
-                                <option value="1">5</option>
-                                <option value="2">6</option>
-                                <option value="1">7</option>
-                                <option value="2">8</option>
-                            </select>
-                        </div>
+                        <input type="text" name="stud_ID" value="{{student[0]}}" hidden>
                     </div>
 
                     <div class="mt-10">
-                        <input type="text" name="cgpa" placeholder="Your current CGPA" required class="single-input"
-                            value="">
+                        <input type="text" name="stud_IC" placeholder="Your IC" required class="single-input" value="{{intern[2]}}">
+                    </div>
+			
+		    {% if student[4] == "1" %}
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select  name="stud_gender">
+	                                <option value="1">M</option>
+	                                <option value="2">F</option>
+	                            </select>
+	                        </div>
+	                    </div>
+		     {% else %}
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select  name="stud_gender">
+	                                <option value="2">F</option>
+	                                <option value="1">M</option>
+	                            </select>
+	                        </div>
+	                    </div>
+		    {% endif %}
+
+		    {% if student[5] == "1" %}
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_programme">
+	                                <option value="1">RSW</option>
+	                                <option value="2">RDS</option>
+	                            </select>
+	                        </div>
+	                    </div>
+		    {% else %}
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_programme">
+	                                <option value="2">RDS</option>
+	                                <option value="1">RSW</option>
+	                            </select>
+	                        </div>
+	                    </div>
+		    {% endif %}
+
+		    {% if student[6] == "1" %}
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_group">
+	                                <option value="1">1</option>
+	                                <option value="2">2</option>
+	                                <option value="3">3</option>
+	                                <option value="4">4</option>
+	                                <option value="5">5</option>
+	                                <option value="6">6</option>
+	                                <option value="7">7</option>
+	                                <option value="8">8</option>
+	                            </select>
+	                        </div>
+	                    </div>
+		    {% elif student[6] == "2"%}
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_group">
+	                                <option value="2">2</option>
+	                                <option value="1">1</option>
+	                                <option value="3">3</option>
+	                                <option value="4">4</option>
+	                                <option value="5">5</option>
+	                                <option value="6">6</option>
+	                                <option value="7">7</option>
+	                                <option value="8">8</option>
+	                            </select>
+	                        </div>
+	                    </div>
+		    {% elif student[6] == "3"%}
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_group">
+	                                <option value="3">3</option>
+	                                <option value="1">1</option>
+	                                <option value="2">2</option>
+	                                <option value="4">4</option>
+	                                <option value="5">5</option>
+	                                <option value="6">6</option>
+	                                <option value="7">7</option>
+	                                <option value="8">8</option>
+	                            </select>
+	                        </div>
+	                    </div>	
+		    {% elif student[6] == "4"%}
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_group">
+	                                <option value="4">4</option>
+	                                <option value="1">1</option>
+	                                <option value="2">2</option>
+	                                <option value="3">3</option>
+	                                <option value="5">5</option>
+	                                <option value="6">6</option>
+	                                <option value="7">7</option>
+	                                <option value="8">8</option>
+	                            </select>
+	                        </div>
+	                    </div>	
+		    {% elif student[6] == "5"%}
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_group">
+	                                <option value="5">5</option>
+	                                <option value="1">1</option>
+	                                <option value="2">2</option>
+	                                <option value="3">3</option>
+	                                <option value="4">4</option>
+	                                <option value="6">6</option>
+	                                <option value="7">7</option>
+	                                <option value="8">8</option>
+	                            </select>
+	                        </div>
+		    {% elif student[6] == "6"%}
+	                    </div>	
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_group">
+	                                <option value="6">6</option>
+	                                <option value="1">1</option>
+	                                <option value="2">2</option>
+	                                <option value="3">3</option>
+	                                <option value="4">4</option>
+	                                <option value="5">5</option>
+	                                <option value="7">7</option>
+	                                <option value="8">8</option>
+	                            </select>
+	                        </div>
+	                    </div>
+		    {% elif student[6] == "7"%}
+	                    </div>	
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_group">
+	                                <option value="7">7</option>
+	                                <option value="1">1</option>
+	                                <option value="2">2</option>
+	                                <option value="3">3</option>
+	                                <option value="4">4</option>
+	                                <option value="5">5</option>
+	                                <option value="6">6</option>
+	                                <option value="8">8</option>
+	                            </select>
+	                        </div>
+	                    </div>
+		    {% else %}
+	                    </div>	
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_group">
+	                                <option value="8">8</option>
+	                                <option value="1">1</option>
+	                                <option value="2">2</option>
+	                                <option value="3">3</option>
+	                                <option value="4">4</option>
+	                                <option value="5">5</option>
+	                                <option value="6">6</option>
+	                                <option value="7">7</option>
+	                            </select>
+	                        </div>
+	                    </div>		
+		    {% endif %}
+
+                    <div class="mt-10">
+                        <input type="text" name="stud_cgpa" placeholder="Your current CGPA" required class="single-input" value="{{intern[7]}}">
                     </div>
 
-                    <div class="input-group-icon mt-10">
-                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
-                        <div class="form-select" id="default-select" name="Intern Batch">
-                            <select>
-                                <option value="1">JUL 2022 (Entry to Year 2)</option>
-                                <option value="2">MAR 2022 (Entry to Year 2)</option>
-                                <option value="1">DEC 2021 (Entry to Year 2)</option>
-                                <option value="2">SEP 2021 (Entry to Year 2)</option>
-                            </select>
-                        </div>
+	            <div class="mt-10">
+                        <label for="password">Password:</label>
+                        <input type="password" name="stud_password" placeholder="Password" required class="single-input" value="{{intern[8]}}">
+                    </div>
+
+		    {% if student[9] == "1" %}	    
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select  name="stud_intern_batch">
+	                                <option value="1">Y22July</option>
+	                                <option value="2">Y22March</option>
+	                                <option value="3">Y21Dec</option>
+	                                <option value="4">Y21July</option>
+	                            </select>
+	                        </div>
+	                    </div>
+		    {% elif student[9] == "2"%}
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_intern_batch">
+	                                <option value="2">Y22March</option>
+	                                <option value="1">Y22July</option>
+	                                <option value="3">Y21Dec</option>
+	                                <option value="4">Y21July</option>
+	                            </select>
+	                        </div>
+	                    </div>
+		    {% elif student[9] == "3"%}
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_intern_batch">
+	                                <option value="3">Y21Dec</option>
+	                                <option value="1">Y22July</option>
+	                                <option value="2">Y22March</option>
+	                                <option value="4">Y21July</option>
+	                            </select>
+	                        </div>
+	                    </div>
+		    {% else %}
+	                    <div class="input-group-icon mt-10">
+	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+	                        <div class="form-select" id="default-select">
+	                            <select name="stud_intern_batch">
+	                                <option value="4">Y21July</option>
+	                                <option value="1">Y22July</option>
+	                                <option value="2">Y22March</option>
+	                                <option value="3">Y21Dec</option>
+	                            </select>
+	                        </div>
+	                    </div>
+		    {% endif %}	    
+ 
+                    <div class="mt-10">
+                        <input type="text" name="stud_own_transport" placeholder="Your own transport" required class="single-input" value="{{intern[10]}}">
                     </div>
 
                     <div class="mt-10">
-                        <input type="text" name="ownTransport" placeholder="Your own transport" required
-                            class="single-input" value="">
+                        <input type="text" name="stud_current_address" placeholder="Current Address" required class="single-input" value="{{intern[11]}}">
                     </div>
 
                     <div class="mt-10">
-                        <input type="text" name="currentAddress" placeholder="Current Address" required
-                            class="single-input" value="">
+                        <input type="text" name="stud_contact_no" placeholder="Contact Number" required class="single-input" value="{{intern[12]}}">
                     </div>
 
                     <div class="mt-10">
-                        <input type="text" name="contactNo" placeholder="Contact Number" required class="single-input"
-                            value="">
+                        <input type="text" name="stud_personal_email" placeholder="Personal Email" required class="single-input" value="{{intern[13]}}">
                     </div>
 
                     <div class="mt-10">
-                        <input type="text" name="personalEmail" placeholder="Personal Email" required
-                            class="single-input" value="">
+                        <input type="text" name="stud_home_address" placeholder="Your home address" required class="single-input" value="{{intern[14]}}">
                     </div>
 
                     <div class="mt-10">
-                        <input type="text" name="homeAddress" placeholder="Your home address" required
-                            class="single-input" value="">
-                    </div>
-
-                    <div class="mt-10">
-                        <input type="text" name="homePhone" placeholder="Your Homephone" required class="single-input"
-                            value="">
+                        <input type="text" name="stud_home_phone" placeholder="Your Homephone" required class="single-input" value="{{intern[15]}}">
                     </div>
 
                     <div class="mt-10">
                         <label for="myfile">Select files:</label>
                         <input type="file" id="resume" name="resume"><br><br>
                     </div>
+	    
+	            <div class="mt-30" style="text-align: center;">
+                    	<button type="save" class="genric-btn success circle arrow">Save</button>
+                    	<a href="/viewStudentInfoDetails" class="genric-btn danger circle arrow">Cancel</a>
+                    </div>
                 </form>
 
-                <div class="mt-30" style="text-align: center;">
-                    <a href="#" class="genric-btn success circle arrow">Save</a>
-                    <a href="viewStudentInfoDetails.html" class="genric-btn danger circle arrow">Cancel</a>
-                </div>
+
             </div>
 
             <div class="col-1g-12 col-md-4 section-top-border">
@@ -215,10 +402,6 @@
                     <h4 id="com_name">Student Name</h4>
                     <h6 id="email">XXX@gamil.com</h6>
                 </div>
-
-
-
-
             </div>
         </div>
 
