@@ -117,13 +117,13 @@
                         <input type="text" name="ic" placeholder="Your IC" required class="single-input" value="{{student[2]}}">
                     </div>
 			
-		    {% if student[4] == "1" %}
+		    {% if student[4] == "M" %}
 	                    <div class="input-group-icon mt-10">
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
 	                            <select  name="gender">
-	                                <option value="1">M</option>
-	                                <option value="2">F</option>
+	                                <option value="M">M</option>
+	                                <option value="F">F</option>
 	                            </select>
 	                        </div>
 	                    </div>
@@ -132,20 +132,20 @@
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
 	                            <select  name="gender">
-	                                <option value="2">F</option>
-	                                <option value="1">M</option>
+	                                <option value="F">F</option>
+	                                <option value="M">M</option>
 	                            </select>
 	                        </div>
 	                    </div>
 		    {% endif %}
 
-		    {% if student[5] == "1" %}
+		    {% if student[5] == "RSW" %}
 	                    <div class="input-group-icon mt-10">
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
 	                            <select name="programme">
-	                                <option value="1">RSW</option>
-	                                <option value="2">RDS</option>
+	                                <option value="RSW">RSW</option>
+	                                <option value="RDS">RDS</option>
 	                            </select>
 	                        </div>
 	                    </div>
@@ -154,8 +154,8 @@
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
 	                            <select name="programme">
-	                                <option value="2">RDS</option>
-	                                <option value="1">RSW</option>
+	                                <option value="RDS">RDS</option>
+	                                <option value="RSW">RSW</option>
 	                            </select>
 	                        </div>
 	                    </div>
@@ -177,7 +177,7 @@
 	                            </select>
 	                        </div>
 	                    </div>
-		    {% elif student[6] == "2"%}
+		    {% else if student[6] == "2" %}
 	                    <div class="input-group-icon mt-10">
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
@@ -193,7 +193,7 @@
 	                            </select>
 	                        </div>
 	                    </div>
-		    {% elif student[6] == "3"%}
+		    {% else if student[6] == "3" %}
 	                    <div class="input-group-icon mt-10">
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
@@ -209,7 +209,7 @@
 	                            </select>
 	                        </div>
 	                    </div>	
-		    {% elif student[6] == "4"%}
+		    {% else if student[6] == "4" %}
 	                    <div class="input-group-icon mt-10">
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
@@ -225,7 +225,7 @@
 	                            </select>
 	                        </div>
 	                    </div>	
-		    {% elif student[6] == "5"%}
+		    {% else if student[6] == "5" %}
 	                    <div class="input-group-icon mt-10">
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
@@ -241,7 +241,7 @@
 	                            </select>
 	                        </div>
 			    </div>
-		    {% elif student[6] == "6"%}	
+		    {% else if student[6] == "6" %}	
 	                    <div class="input-group-icon mt-10">
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
@@ -257,7 +257,7 @@
 	                            </select>
 	                        </div>
 	                    </div>
-		    {% elif student[6] == "7"%}	
+		    {% else if student[6] == "7" %}	
 	                    <div class="input-group-icon mt-10">
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
@@ -300,39 +300,39 @@
                         <input type="password" name="password" placeholder="Password" required class="single-input" value="{{student[8]}}">
                     </div>
 
-		    {% if student[9] == "1" %}	    
+		    {% if student[9] == "Y22July" %}	    
 	                    <div class="input-group-icon mt-10">
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
 	                            <select  name="intern_batch">
-	                                <option value="1">Y22July</option>
-	                                <option value="2">Y22March</option>
-	                                <option value="3">Y21Dec</option>
-	                                <option value="4">Y21July</option>
+	                                <option value="Y22July">Y22July</option>
+	                                <option value="Y22March">Y22March</option>
+	                                <option value="Y21Dec">Y21Dec</option>
+	                                <option value="Y21July">Y21July</option>
 	                            </select>
 	                        </div>
 	                    </div>
-		    {% elif student[9] == "2"%}
+		    {% else if student[9] == "Y22March" %}
 	                    <div class="input-group-icon mt-10">
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
 	                            <select name="intern_batch">
-	                                <option value="2">Y22March</option>
-	                                <option value="1">Y22July</option>
-	                                <option value="3">Y21Dec</option>
-	                                <option value="4">Y21July</option>
+	                                <option value="Y22March">Y22March</option>
+	                                <option value="Y22July">Y22July</option>
+	                                <option value="Y21Dec">Y21Dec</option>
+	                                <option value="Y21July">Y21July</option>
 	                            </select>
 	                        </div>
 	                    </div>
-		    {% elif student[9] == "3"%}
+		    {% else if student[9] == "Y21Dec" %}
 	                    <div class="input-group-icon mt-10">
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
 	                            <select name="intern_batch">
-	                                <option value="3">Y21Dec</option>
-	                                <option value="1">Y22July</option>
-	                                <option value="2">Y22March</option>
-	                                <option value="4">Y21July</option>
+	                                <option value="Y21Dec">Y21Dec</option>
+	                                <option value="Y22July">Y22July</option>
+	                                <option value="Y22March">Y22March</option>
+	                                <option value="Y21July">Y21July</option>
 	                            </select>
 	                        </div>
 	                    </div>
@@ -341,10 +341,10 @@
 	                        <div class="icon"><i class="fa fa-home" aria-hidden="true"></i></div>
 	                        <div class="form-select" id="default-select">
 	                            <select name="intern_batch">
-	                                <option value="4">Y21July</option>
-	                                <option value="1">Y22July</option>
-	                                <option value="2">Y22March</option>
-	                                <option value="3">Y21Dec</option>
+	                                <option value="Y21July">Y21July</option>
+	                                <option value="Y22July">Y22July</option>
+	                                <option value="Y22March">Y22March</option>
+	                                <option value="Y21Dec">Y21Dec</option>
 	                            </select>
 	                        </div>
 	                    </div>
@@ -415,7 +415,7 @@
                 </div>
 
                 <div class="col-md-12 typography text-center">
-                    <h4 id="com_name">{{ student[0] }}</h4>
+                    <h4 id="com_name">{{ student[1] }}</h4>
                     <h6 id="email">{{ student[3] }}</h6>
                 </div>
             </div>
