@@ -59,7 +59,7 @@ def editStudent(stud_id):
     cursor.execute(statement, (stud_id,))
     result = cursor.fetchone()
 
-    return redirect('/editStudentInfoDetails.html/', student=result)
+    return render_template('editStudentInfoDetails.html', student=result)
 
 @app.route('/updateStudent', methods=['POST'])
 def updateStudent():
