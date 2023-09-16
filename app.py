@@ -78,7 +78,7 @@ def updateStudent():
     personalEmail = request.form['personalEmail']
     homeAddress = request.form['homeAddress']
     homePhone = request.form['homePhone']
-    resume = request.form['resume']
+    #resume = request.form['resume']
 
     statement = "UPDATE Student SET ic = %s, gender = %c, programme = %s, group = %d, cgpa = %f, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s WHERE stud_id = %s;"
     cursor = db_conn.cursor()
