@@ -61,7 +61,7 @@ def editStudent(stud_id):
 
     return render_template('editStudentInfoDetails.html', student=result)
 
-@app.route('/updateStudent', methods=['POST'])
+@app.route('/updateStudent', methods=['POST','GET'])
 def updateStudent():
 
     stud_id =  request.form['stud_id']
@@ -78,7 +78,7 @@ def updateStudent():
     personalEmail = request.form['personalEmail']
     homeAddress = request.form['homeAddress']
     homePhone = request.form['homePhone']
-    resume = request.form.get['resume', None]
+    #resume = request.files['resume']
 
     statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, group = %d, cgpa = %d, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s WHERE stud_id = %s;"
     cursor = db_conn.cursor()
