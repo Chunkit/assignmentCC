@@ -51,7 +51,7 @@ def viewStudentInfoDetails(stud_id):
 
     return render_template('viewStudentInfoDetails.html', student=result)
 
-@app.route('/editStudentInfoDetails/<int:stud_id>')
+@app.route('/editStudentInfoDetails/<stud_id>')
 def editStudent(stud_id):
 
     statement = "SELECT * FROM Students WHERE stud_id = %s"
@@ -78,7 +78,7 @@ def updateStudent():
     cursor.execute(statement, (job_title, job_desc, job_salary, job_location, workingDay, workingHour, accommodation, intern_id))
     db_conn.commit()  # Commit the changes to the database
 
-    return redirect("/viewIntern/" + intern_id)
+    return redirect("/viewStudentInfoDetails/" + stud_id)
         
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
