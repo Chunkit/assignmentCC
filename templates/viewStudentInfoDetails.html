@@ -116,13 +116,7 @@
 
 			    <div class="mt-10"><!--Gender-->
                                 Gender:<br>
-				<span class="single-input"><i class="fa fa-home" aria-hidden="true"></i>
-				      {% if student[4] == "Yes" %}
-                                      F
-                                      {% else %}
-                                      M
-                                      {% endif %}
-				</span>
+				<span class="single-input">{{ student[4] }}</span>
                             </div>
 
                             <div class="mt-10"> <!--Programme-->
