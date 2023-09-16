@@ -65,9 +65,7 @@ def editStudent(stud_id):
 def updateStudent():
 
     stud_id =  request.form['stud_id']
-    stud_name =  request.form['stud_name']
     ic = request.form['ic']
-    email = request.form['email']
     gender = request.form['gender']
     programme = request.form['programme']
     group = request.form['group']
@@ -80,7 +78,6 @@ def updateStudent():
     personalEmail = request.form['personalEmail']
     homeAddress = request.form['homeAddress']
     homePhone = request.form['homePhone']
-    profile_img = request.form['profile_img']
     resume = request.form['resume']
 
     statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, group = %d, cgpa = %d, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s WHERE stud_id = %s;"
