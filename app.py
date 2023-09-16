@@ -82,7 +82,7 @@ def updateStudent():
 
     statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, group = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s WHERE stud_id = %s;"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, stud_id, ))
+    cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, stud_id))
     db_conn.commit()  # Commit the changes to the database
 
     return redirect("/viewStudentInfoDetails/" + stud_id)
