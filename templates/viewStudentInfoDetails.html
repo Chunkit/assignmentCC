@@ -113,35 +113,11 @@
                             </div>
 
                             <div class="mt-10"> <!--Programme-->
-                                <span class="single-input"><i class="fa fa-home" aria-hidden="true"></i>
-                                        {% if student[5] == "Yes" %}
-                                    RSW
-                                    {% else %}
-                                    RDS
-                                    {% endif %}
-                                </span>
+                                <span class="single-input">{{ student[5] }}</span>
                             </div>
                 
                             <div class="mt-10"> <!--Group-->
-                                <span class="single-input"><i class="fa fa-home" aria-hidden="true"></i>
-                                        {% if student[6] == "Yes" %}
-                                    1
-                                    {% elif student[6] == "SomethingElse" %}
-                                    2
-                                    {% elif student[6] == "AnotherOption" %}
-                                    3
-                                    {% elif student[6] == "YetAnotherOption" %}
-                                    4
-                                    {% elif student[6] == "MayAnotherOption" %}
-                                    5
-                                    {% elif student[6] == "MaybeAnotherOption" %}
-                                    6
-                                    {% elif student[6] == "OrAnotherOption" %}
-                                    7
-                                    {% elif student[6] == "MightAnotherOption" %}
-                                    8
-                                    {% endif %}
-                                </span>
+                                <span class="single-input">{{ student[6] }}</span>
                             </div>
 
                             <div class="mt-10"><!--CGPA-->
@@ -149,17 +125,7 @@
                             </div>
 
                             <div class="mt-10"> <!--Intern Batch-->
-                                <span class="single-input"><i class="fa fa-home" aria-hidden="true"></i>
-                                        {% if student[8] == "Yes" %}
-                                    JUL 2022 (Entry to Year 2)
-                                    {% elif student[8] == "AnotherOption" %}
-                                    MAR 2022 (Entry to Year 2)
-                                    {% elif student[8] == "YetAnotherOption" %}
-                                    DEC 2021 (Entry to Year 2)
-                                    {% elif student[8] == "MayAnotherOption" %}
-                                    SEP 2021 (Entry to Year 2)
-                                    {% endif %}
-                                </span>
+                                <span class="single-input">{{ student[8] }}</span>
                             </div>
                 
                             <div class="mt-10"><!--Own Transport-->
