@@ -54,7 +54,7 @@ def viewStudentInfoDetails(stud_id):
 @app.route('/editStudentInfoDetails/<stud_id>')
 def editStudent(stud_id):
 
-    statement = "SELECT * FROM Students WHERE stud_id = %s"
+    statement = "SELECT * FROM Student WHERE stud_id = %s"
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_id,))
     result = cursor.fetchone()
