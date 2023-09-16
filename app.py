@@ -56,7 +56,7 @@ def editStudent(stud_id):
 
     statement = "SELECT * FROM Students WHERE stud_id = %s"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_id))
+    cursor.execute(statement, (stud_id,))
     result = cursor.fetchone()
 
     return render_template('editStudentInfoDetails.html', student=result)
