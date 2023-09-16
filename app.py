@@ -64,18 +64,25 @@ def editStudent(stud_id):
 @app.route('/updateStudent', methods=['POST'])
 def updateStudent():
 
-    stud_id =  request.form['intern_id']
-    job_title = request.form['job_title']
-    job_desc = request.form['job_description']
-    job_salary = request.form['job_salary']
-    job_location = request.form['job_location']
-    workingDay = request.form['workingDay']
-    workingHour = request.form['workingHour']
-    accommodation = request.form['accommodation']
+    stud_id =  request.form['stud_id']
+    ic = request.form['ic']
+    gender = request.form['gender']
+    programme = request.form['programme']
+    group = request.form['group']
+    cgpa = request.form['cgpa']
+    password = request.form['password']
+    intern_batch = request.form['intern_batch']
+    ownTransport = request.form['ownTransport']
+    currentAddress = request.form['currentAddress']
+    contactNo = request.form['contactNo']
+    personalEmail = request.form['personalEmail']
+    homeAddress = request.form['homeAddress']
+    homePhone = request.form['homePhone']
+    resume = request.form['resume']
 
-    statement = "UPDATE Internship SET job_title = %s, job_description = %s, intern_salary = %s, location = %s, workingDay = %s, workingHour = %s, accommodation = %s WHERE intern_id = %s;"
+    statement = "UPDATE Student SET ic = %s, gender = %c, programme = %s, group = %d, cgpa = %f, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s WHERE stud_id = %s;"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (job_title, job_desc, job_salary, job_location, workingDay, workingHour, accommodation, intern_id))
+    cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, stud_id))
     db_conn.commit()  # Commit the changes to the database
 
     return redirect("/viewStudentInfoDetails/" + stud_id)
