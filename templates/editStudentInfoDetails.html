@@ -417,8 +417,8 @@
                 </div>
 
                 <div class="col-md-12 typography text-center">
-                    <h4 id="com_name">Student Name</h4>
-                    <h6 id="email">XXX@gamil.com</h6>
+                    <h4 id="com_name">{{ student[0] }}</h4>
+                    <h6 id="email">{{ student[3] }}</h6>
                 </div>
             </div>
         </div>
@@ -621,8 +621,4 @@
 
 </html>
 
-<script>
-    $(document).ready(function () {
-        $("#viewIntern :input").prop("disabled", true);
-    });
-</script>
+
