@@ -129,7 +129,7 @@ def updateStudent():
     homeAddress = request.form['homeAddress']
     homePhone = request.form['homePhone']
     resume = request.files['resume']
-    
+
     statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, `group` = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = %s WHERE stud_id = %s;"
     cursor = db_conn.cursor()
 
@@ -138,32 +138,29 @@ def updateStudent():
 
     if not allowed_file(resume.filename):
         return "File type not allowed. Only PDFs are allowed."
-        
-    resume_filename = secure_filename(resume.filename)
-    resume_in_s3 = "stud_id-" + str(stud_id) + "_pdf"
+
     try:
-        resume.save('/resume.pdf') 
-        # Upload to S3
-        s3 = boto3.client('s3', region_name=region)
-        with open(resume_filename, 'rb') as resume_file:
-            s3.upload_fileobj(resume_file, bucket, resume_in_s3)
+        cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, resume, stud_id))
+        db_conn.commit()  # Commit the changes to the database
 
-        # Remove the temporary file
-        os.remove(resume_filename)
+        resume_in_s3 = "stud_id-" + str(stud_id) + "_pdf"
+        s3 = boto3.resource('s3')
 
-        # Update the database with the S3 object URL
-        cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, resume_in_s3, stud_id))
-        db_conn.commit()
+        try:
+            print("Data inserted in MySQL RDS... uploading pdf to S3...")
+            s3.Bucket(custombucket).put_object(Key=resume_in_s3, Body=resume, ContentType=resume.content_type)
 
-        return redirect("/viewStudentInfoDetails/" + stud_id)
+            # Generate the object URL
+            object_url = f"https://{custombucket}.s3.amazonaws.com/{resume_in_s3}"
 
-    except Exception as e:
-        return str(e)
-
+        except Exception as e:
+            return str(e)
+            
     finally:
         cursor.close()
         
     return redirect("/viewStudentInfoDetails/" + stud_id)
+
         
 if __name__ == '__main__':
     app.secret_key = 'chunkit_key'
