@@ -108,7 +108,7 @@ def updateStudent():
             print("Data inserted in MySQL RDS... uploading image to S3...")
             s3.Bucket(custombucket).put_object(Key=resume_in_s3,Body=resume,ContentType=resume.content_type)
 
-            object_url = f"https://{custombucket}.s3.amazonaws.com/{profile_image_in_s3}"
+            object_url = f"https://{custombucket}.s3.amazonaws.com/{resume_in_s3}"
 
         except Exception as e:
             return str(e)
