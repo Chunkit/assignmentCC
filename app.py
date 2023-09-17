@@ -157,4 +157,5 @@ def updateStudent():
     return redirect("/viewStudentInfoDetails/" + stud_id)
         
 if __name__ == '__main__':
+    app.secret_key = 'chunkit_key'
     app.run(host='0.0.0.0', port=80, debug=True)
