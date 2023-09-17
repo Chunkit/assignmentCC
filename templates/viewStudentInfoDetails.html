@@ -55,7 +55,7 @@
                         <h3 class="text-heading mb-30">View Student</h3>
                         
                         <form action="#" id="viewStudentInfoDetails">
-
+			    {{ csrf_token() }}
                             <div class="mt-10"><!--Student ID-->
                                 Student ID:<br>
 				<span class="single-input">{{ student[0] }}</span>
