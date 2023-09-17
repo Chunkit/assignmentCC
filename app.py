@@ -128,7 +128,7 @@ def updateStudent():
     homeAddress = request.form['homeAddress']
     homePhone = request.form['homePhone']
     resume = request.files['resume']
-
+    resume.save('/tmp/resume.pdf') 
     statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, `group` = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = %s WHERE stud_id = %s;"
     cursor = db_conn.cursor()
 
