@@ -166,7 +166,7 @@ def viewReport(stud_id):
     cursor.execute(statement, (stud_id,))
     result = cursor.fetchone() #Assuming there's only one student with the given ID
             
-    return render_template('viewReport.html', student=result)
+    return render_template('viewReport.html', report=result)
 
 if __name__ == '__main__':
     app.secret_key = 'chunkit_key'
