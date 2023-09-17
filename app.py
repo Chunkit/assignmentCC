@@ -107,8 +107,10 @@ def editStudent(stud_id):
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_id,))
     result = cursor.fetchone()
-
-    return render_template('editStudentInfoDetails.html', student=result)
+    
+    # Retrieve the current resume URL
+    current_resume_url = result[16]  # Assuming that the resume URL is in the 16th column of the Student table
+    return render_template('editStudentInfoDetails.html', student=result, current_resume_url=current_resume_url)
 
 @app.route('/updateStudent', methods=['POST','GET'])
 @csrf.exempt 
