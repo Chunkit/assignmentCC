@@ -85,7 +85,7 @@ def updateStudent():
     homePhone = request.form['homePhone']
     resume = request.files['resume']
 
-    statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, group = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s WHERE stud_id = %s;"
+    statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, group = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = %s WHERE stud_id = %s;"
     cursor = db_conn.cursor()
 
     if resume.filename == "":
@@ -95,7 +95,7 @@ def updateStudent():
         return "File type not allowed. Only PDFs are allowed."
 
     try:
-        cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, stud_id))
+        cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, resume, stud_id))
         db_conn.commit()  # Commit the changes to the database
 
         resume_in_s3 = "stud_id-" + str(stud_id) + "_pdf"
