@@ -8,6 +8,7 @@ import botocore
 import pdfplumber
 # Use BytesIO to handle the binary content
 from io import BytesIO
+from flask import send_file
 
 customhost = "internshipdb.c9euwctn4e9a.us-east-1.rds.amazonaws.com"
 customuser = "admin"
