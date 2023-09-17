@@ -125,13 +125,6 @@ def editStudent(stud_id):
 
     return render_template('editStudentInfoDetails.html', student=result, resume_info=resume_info)
 
-# Modify your viewStudentInfoDetails.html template to include a link to view the resume
-{% if resume_info %}
-    <a href="{{ url_for('view_resume', stud_id=student[0]) }}">View Resume</a>
-{% else %}
-    No resume available
-{% endif %}
-
 @app.route('/updateStudent', methods=['POST','GET'])
 @csrf.exempt 
 def updateStudent():
