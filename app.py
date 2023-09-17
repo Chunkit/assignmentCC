@@ -159,7 +159,15 @@ def updateStudent():
         
     return redirect("/viewStudentInfoDetails/" + stud_id)
 
-        
+ @app.route('/viewReport/<stud_id>')
+def viewReport(stud_id):
+    statement = "SELECT r.* FROM Report r JOIN Student s ON r.stud_id = s.stud_id WHERE s.stud_id = %s"
+    cursor = db_conn.cursor()
+    cursor.execute(statement, (stud_id,))
+    result = cursor.fetchone() #Assuming there's only one student with the given ID
+            
+    return render_template('viewReport.html', student=result)
+
 if __name__ == '__main__':
     app.secret_key = 'chunkit_key'
     app.run(host='0.0.0.0', port=80, debug=True)
