@@ -59,7 +59,7 @@
                 <h3 class="text-heading mb-30">Edit Student Info</h3>
 
                 <form action="/updateStudent" autocomplete="on" method="POST" enctype="multipart/form-data">
-
+		    {{ csrf_token() }}
                     <div class="mt-10">
                         <input type="text" name="stud_id" value="{{student[0]}}" hidden>
                     </div>
