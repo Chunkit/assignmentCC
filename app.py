@@ -100,8 +100,10 @@ def view_resume(stud_id):
         
     return render_template('viewStudentInfoDetails.html', student=result)
 
-def get_resume_from_s3(resume_filename):
+def get_resume_from_s3(stud_id, default_resume):
     s3 = boto3.client('s3', region_name=region)
+    resume_filename = "stud_id-" + str(stud_id) + "_pdf"
+
     try:
         response = s3.head_object(Bucket=bucket, Key=resume_filename)
         content_length = response.get('ContentLength')
@@ -110,23 +112,26 @@ def get_resume_from_s3(resume_filename):
         return content_length, content_type, content_disposition
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == "404":
+            # Resume does not exist in S3, fetch the default resume from the database
             return None, None, None
         else:
             raise
 
 
+
 @app.route('/editStudentInfoDetails/<stud_id>')
 def editStudent(stud_id):
-
     statement = "SELECT * FROM Student WHERE stud_id = %s"
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_id,))
     result = cursor.fetchone()
 
-    resume_filename = "stud_id-" + str(stud_id) + "_pdf"
-    resume_info = get_resume_from_s3(resume_filename)
+    # Fetch the default resume content from your database based on stud_id
+    default_resume = fetch_default_resume_from_database(stud_id)  # Implement this function
 
-    return render_template('editStudentInfoDetails.html', student=result, resume_info=resume_info)
+    content_length, content_type, content_disposition = get_resume_from_s3(stud_id, default_resume)
+
+    return render_template('editStudentInfoDetails.html', student=result, resume_info=(content_length, content_type, content_disposition))
 
 @app.route('/updateStudent', methods=['POST','GET'])
 @csrf.exempt 
