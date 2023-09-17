@@ -88,7 +88,7 @@ def view_resume(stud_id):
             return send_file(
                 resume_buffer,
                 as_attachment=True,
-                attachment_filename="resume-" + str(stud_id) + "_pdf",
+                download_name="resume-" + str(stud_id) + "_pdf",
                 mimetype='application/pdf'
             )
                     
