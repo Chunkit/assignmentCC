@@ -1,7 +1,10 @@
-from flask import Flask, render_template, request
+from curses import flash
+from flask_wtf.csrf import CSRFProtect, CSRFError
+from flask import Flask, render_template, request, redirect, flash, jsonify
 from pymysql import connections
 import os
 import boto3
+import botocore
 
 customhost = "internshipdb.c9euwctn4e9a.us-east-1.rds.amazonaws.com"
 customuser = "admin"
@@ -78,13 +81,36 @@ def updateStudent():
     personalEmail = request.form['personalEmail']
     homeAddress = request.form['homeAddress']
     homePhone = request.form['homePhone']
-    #resume = request.files['resume']
+    resume = request.files['resume']
 
     statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, group = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s WHERE stud_id = %s;"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, stud_id))
-    db_conn.commit()  # Commit the changes to the database
 
+    if resume.filename == "":
+        return "Please add a resume"
+
+    if  not allowed_file(resume.filename):
+        return "File type not allowed. Only PDFs are allowed."
+
+    try:
+        cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, stud_id))
+        db_conn.commit()  # Commit the changes to the database
+
+        resume_in_s3 = "stud_id-" + str(stud_id) + "_pdf"
+        s3 = boto3.resource('s3')
+
+        try:
+            print("Data inserted in MySQL RDS... uploading image to S3...")
+            s3.Bucket(custombucket).put_object(Key=resume_in_s3,Body=resume,ContentType=resume.content_type)
+
+            object_url = f"https://{custombucket}.s3.amazonaws.com/{profile_image_in_s3}"
+
+        except Exception as e:
+            return str(e)
+            
+    finally:
+        cursor.close()
+        
     return redirect("/viewStudentInfoDetails/" + stud_id)
         
 if __name__ == '__main__':
