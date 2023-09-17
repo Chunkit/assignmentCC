@@ -132,32 +132,32 @@ def updateStudent():
 
     cursor = db_conn.cursor()
 
-    if resume.filename == "":
-        return "Please add a resume"
+    if resume.filename != "":
+        if not allowed_file(resume.filename):
+            return "File type not allowed. Only PDFs are allowed."
 
-    if not allowed_file(resume.filename):
-        return "File type not allowed. Only PDFs are allowed."
-        
+        resume_in_s3 = "stud_id-" + str(stud_id) + "_pdf"
+        s3 = boto3.resource('s3')
 
-    resume_in_s3 = "stud_id-" + str(stud_id) + "_pdf"
-    s3 = boto3.resource('s3')
+        try:
+            print("Data inserted in MySQL RDS... uploading pdf to S3...")
+            s3.Bucket(custombucket).put_object(Key=resume_in_s3, Body=resume, ContentType=resume.content_type)
 
-    try:
-        print("Data inserted in MySQL RDS... uploading pdf to S3...")
-        s3.Bucket(custombucket).put_object(Key=resume_in_s3, Body=resume, ContentType=resume.content_type)
-
-        # Generate the object URL
-        object_url = f"https://{custombucket}.s3.amazonaws.com/{resume_in_s3}"
-        statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, `group` = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = %s WHERE stud_id = %s;"
-        cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, object_url, stud_id))
+            # Generate the object URL
+            object_url = f"https://{custombucket}.s3.amazonaws.com/{resume_in_s3}"
+            statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, `group` = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = %s WHERE stud_id = %s;"
+            cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, object_url, stud_id))
+            db_conn.commit()  # Commit the changes to the database
+        except Exception as e:
+            return str(e)
+    else:
+        # If no new resume is uploaded, keep the existing URL in the database
+        statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, `group` = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s WHERE stud_id = %s;"
+        cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, stud_id))
         db_conn.commit()  # Commit the changes to the database
-    except Exception as e:
-        return str(e)
-            
-    finally:
-        cursor.close()
         
     return redirect("/viewStudentInfoDetails/" + stud_id)
+
 
         
 if __name__ == '__main__':
