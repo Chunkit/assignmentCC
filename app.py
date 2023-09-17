@@ -159,7 +159,7 @@ def updateStudent():
         
     return redirect("/viewStudentInfoDetails/" + stud_id)
 
- @app.route('/viewReport', methods=['POST','GET'])
+ @app.route('/viewReport/<stud_id>')
 def viewReport(stud_id):
     statement = "SELECT r.* FROM Report r JOIN Student s ON r.stud_id = s.stud_id WHERE s.stud_id = %s"
     cursor = db_conn.cursor()
