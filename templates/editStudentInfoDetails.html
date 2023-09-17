@@ -1,4 +1,4 @@
-a<!doctype html>
+<!doctype html>
 <html class="no-js" lang="zxx">
 
 </html>
@@ -345,7 +345,7 @@ a<!doctype html>
 
                     <div class="mt-10">
                         <label for="myfile">Select files:</label>
-                        <input type="file" id="resume" name="resume" accept=".pdf" default=""><br><br>
+                        <input type="file" id="resume" name="resume" accept=".pdf" default="{{student[16] | safe}}"><br><br>
 			<p><i>Accepted file format: PDF</i></p>
                     </div>
 	    
@@ -391,34 +391,6 @@ a<!doctype html>
 	        });
 	</script>
 
-	<script>
-		<!-- Get the resume field from the DOM. -->
-		const resumeField = document.getElementById('resume');
-
-		<!-- Get the resume value from the database. -->
-		const resumeValue = await getResumeValueFromDatabase(stud_id);;
-
-		<!-- If the resume value is not empty, set the resume field's value to the resume value. -->
-		if (resumeValue !== '') {
-  			resumeField.value = resumeValue;
-		}
-		<!-- Function to get the resume value from the database. -->
-		async function getResumeValueFromDatabase(stud_id) {
-  		<!-- Make an AJAX request to the Heidi database to get the resume value.
-  		const response = await fetch(`/getResumeValue/${stud_id}`);
-
-  		<!-- Check the response status. -->
-  		if (response.status !== 200) {
-    			throw new Error('Failed to get resume value from database.');
-  		}
-
-  		<!-- Get the resume value from the response JSON. -->
-  		const resumeValue = await response.json();
-
- 		<!-- Return the resume value.-->
-  		return resumeValue;
-		}
-	</script>
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="{{url_for('static', filename='js/vendor/modernizr-3.5.0.min.js')}}"></script>
 		<!-- Jquery, Popper, Bootstrap -->
