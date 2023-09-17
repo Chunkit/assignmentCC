@@ -130,7 +130,6 @@ def updateStudent():
     homePhone = request.form['homePhone']
     resume = request.files['resume']
 
-    statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, `group` = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = %s WHERE stud_id = %s;"
     cursor = db_conn.cursor()
 
     if resume.filename == "":
@@ -152,7 +151,8 @@ def updateStudent():
 
             # Generate the object URL
             object_url = f"https://{custombucket}.s3.amazonaws.com/{resume_in_s3}"
-
+            statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, `group` = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = object_url WHERE stud_id = %s;"
+            
         except Exception as e:
             return str(e)
             
