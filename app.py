@@ -75,11 +75,12 @@ def view_resume(stud_id):
 
     resume_key = "stud_id-" + str(stud_id) + "_pdf"
 
-    s3 = boto3.resource('s3')
+    s3 = boto3.client('s3', region_name=region)
     try:
         with BytesIO() as resume_buffer:
             s3.download_fileobj(bucket_name, resume_key, resume_buffer)
             resume_buffer.seek(0)
+
 
         try:
             # Return the PDF file
