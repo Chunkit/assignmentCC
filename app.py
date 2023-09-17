@@ -101,15 +101,15 @@ def view_resume(stud_id):
     return render_template('viewStudentInfoDetails.html', student=result)
 
 def get_resume_from_s3(resume_filename):
-    s3 = boto3.client('s3')
-
-    # Get the resume file from S3.
-    response = s3.get_object(Bucket=bucket, Key=resume_filename)
-
-    # Read the resume file as a string.
-    resume_string = response['Body'].read().decode('utf-8')
-
-    return resume_string
+    s3 = boto3.client('s3', region_name=region)
+    try:
+        response = s3.head_object(Bucket=bucket, Key=resume_filename)
+        return response['ContentLength'], response['ContentType'], response['ContentDisposition']
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == "404":
+            return None
+        else:
+            raise
 
 
 @app.route('/editStudentInfoDetails/<stud_id>')
@@ -120,17 +120,18 @@ def editStudent(stud_id):
     cursor.execute(statement, (stud_id,))
     result = cursor.fetchone()
 
-     # Get the resume value from the database.
-    resume_filename = result[16]
+    resume_filename = "stud_id-" + str(stud_id) + "_pdf"
+    resume_info = get_resume_from_s3(resume_filename)
 
-    # If the resume filename is not empty, get the resume from S3.
-    if resume_filename is not None:
-        resume_string = get_resume_from_s3(resume_filename)
+    return render_template('editStudentInfoDetails.html', student=result, resume_info=resume_info)
 
-        # Set the resume value in the result object to the resume string.
-        result[16] = resume_string
-        
-    return render_template('editStudentInfoDetails.html', student=result)
+# Modify your viewStudentInfoDetails.html template to include a link to view the resume
+<!-- Add this code to your template -->
+{% if resume_info %}
+    <a href="{{ url_for('view_resume', stud_id=student[0]) }}">View Resume</a>
+{% else %}
+    No resume available
+{% endif %}
 
 @app.route('/updateStudent', methods=['POST','GET'])
 @csrf.exempt 
