@@ -345,8 +345,10 @@
 
                     <div class="mt-10">
                         <label for="myfile">Select files:</label>
-                        <input type="file" id="resume" name="resume" accept=".pdf" {% if not student[16] %} required {% endif %}><br><br>
+                        <input type="file" id="resume" name="resume" accept=".pdf"><br><br>
 			<p><i>Accepted file format: PDF</i></p>
+			<!-- Display the current resume URL as a link for reference -->
+    			<a href="{{ current_resume_url }}" target="_blank"></a>
                     </div>
 	    
 	            <div class="mt-30" style="text-align: center;">
