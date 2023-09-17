@@ -104,10 +104,13 @@ def get_resume_from_s3(resume_filename):
     s3 = boto3.client('s3', region_name=region)
     try:
         response = s3.head_object(Bucket=bucket, Key=resume_filename)
-        return response['ContentLength'], response['ContentType'], response['ContentDisposition']
+        content_length = response.get('ContentLength')
+        content_type = response.get('ContentType')
+        content_disposition = response.get('ContentDisposition')
+        return content_length, content_type, content_disposition
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == "404":
-            return None
+            return None, None, None
         else:
             raise
 
