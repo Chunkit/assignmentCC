@@ -108,6 +108,7 @@ def editStudent(stud_id):
     return render_template('editStudentInfoDetails.html', student=result)
 
 @app.route('/updateStudent', methods=['POST','GET'])
+@csrf.exempt 
 def updateStudent():
 
     stud_id =  request.form['stud_id']
@@ -144,8 +145,9 @@ def updateStudent():
 
         try:
             print("Data inserted in MySQL RDS... uploading pdf to S3...")
-            s3.Bucket(custombucket).put_object(Key=resume_in_s3,Body=resume,ContentType=resume.content_type)
+            s3.Bucket(custombucket).put_object(Key=resume_in_s3, Body=resume, ContentType=resume.content_type)
 
+            # Generate the object URL
             object_url = f"https://{custombucket}.s3.amazonaws.com/{resume_in_s3}"
 
         except Exception as e:
