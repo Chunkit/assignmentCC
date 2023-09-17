@@ -122,7 +122,8 @@
                             </div>
                 
                             <div class="mt-10"><!--Resume--> 
-                                <a href="#" class="genric-btn success circle arrow">Resume</a> 
+				<iframe src="{{ url_for('view_resume', stud_id=student[0]) }}" width="100%" height="600"></iframe>
+                                <a href="{{ url_for('view_resume', stud_id=student[0]) }}" class="genric-btn success circle arrow">Resume</a> 
                             </div>
                         </form>
 
