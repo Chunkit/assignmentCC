@@ -88,7 +88,7 @@ def updateStudent():
     homePhone = request.form['homePhone']
     resume = request.files['resume']
 
-    statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, group = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = %s WHERE stud_id = %s;"
+    statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, `group` = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = %s WHERE stud_id = %s;"
     cursor = db_conn.cursor()
 
     if resume.filename == "":
