@@ -1,5 +1,5 @@
-from flask_wtf.csrf import CSRFProtect, CSRFError
 from curses import flash
+from flask_wtf.csrf import CSRFProtect, CSRFError
 from flask import Flask, render_template, request, redirect, flash, jsonify
 from pymysql import connections
 import os
@@ -16,21 +16,15 @@ customdb = "internshipDB"
 custombucket = "bucket-internship"
 customregion = "us-east-1"
 
-# Define the resume file name
-resume_file_name = 'resume.pdf'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf'}
 
 app = Flask(__name__, static_folder='assets')
+#encrypt
+csrf = CSRFProtect(app)
 
 bucket = custombucket
 region = customregion
 
-#encrypt
-csrf = CSRFProtect(app)
-app.config.update(dict(
-    SECRET_KEY="kwochunkit_secretkey",
-    WTF_CSRF_SECRET_KEY="a csrf secret key"
-))
 
 db_conn = connections.Connection(
     host=customhost,
