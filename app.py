@@ -1,5 +1,4 @@
 from curses import flash
-from flask_wtf.csrf import CSRFProtect, CSRFError
 from flask import Flask, render_template, request, redirect, flash, jsonify
 from pymysql import connections
 import os
@@ -17,7 +16,6 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf'}
 
 app = Flask(__name__, static_folder='assets')
 
-csrf = CSRFProtect(app)
 bucket = custombucket
 region = customregion
 
