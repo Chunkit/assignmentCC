@@ -12,9 +12,11 @@ customdb = "internshipDB"
 custombucket = "bucket-internship"
 customregion = "us-east-1"
 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf'}
 
 app = Flask(__name__, static_folder='assets')
 
+csrf = CSRFProtect(app)
 bucket = custombucket
 region = customregion
 
@@ -27,6 +29,8 @@ db_conn = connections.Connection(
 
 )
 output = {}
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1).lower() in ALLOWED_EXTENSIONS
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
