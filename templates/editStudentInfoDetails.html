@@ -345,7 +345,7 @@ a<!doctype html>
 
                     <div class="mt-10">
                         <label for="myfile">Select files:</label>
-                        <input type="file" id="resume" name="resume" accept=".pdf" default="{{student[16]}}"><br><br>
+                        <input type="file" id="resume" name="resume" accept=".pdf" default=""><br><br>
 			<p><i>Accepted file format: PDF</i></p>
                     </div>
 	    
@@ -389,6 +389,19 @@ a<!doctype html>
 	            $("#header").load("{{ url_for('static', filename='templates/Header.html') }}");
 	            $("#footer").load("{{ url_for('static', filename='templates/Footer.html') }}");
 	        });
+	</script>
+
+	<script>
+		<!-- Get the resume field from the DOM. -->
+		const resumeField = document.getElementById('resume');
+
+		<!-- Get the resume value from the database. -->
+		const resumeValue = '{{student[16]}}';
+
+		<!-- If the resume value is not empty, set the resume field's value to the resume value. -->
+		if (resumeValue !== '') {
+  			resumeField.value = resumeValue;
+		}
 	</script>
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="{{url_for('static', filename='js/vendor/modernizr-3.5.0.min.js')}}"></script>
