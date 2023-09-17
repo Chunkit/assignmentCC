@@ -98,7 +98,9 @@ def view_resume(stud_id):
                     
         except Exception as e:
             return str(e)
-
+    finally:
+        cursor.close()
+        
     return render_template('viewStudentInfoDetails.html', student=result)
 
 @app.route('/editStudentInfoDetails/<stud_id>')
