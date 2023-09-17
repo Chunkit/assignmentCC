@@ -142,7 +142,7 @@ def updateStudent():
     resume_filename = secure_filename(resume.filename)
     resume_in_s3 = "stud_id-" + str(stud_id) + "_pdf"
     try:
-        resume.save('/tmp/resume.pdf') 
+        resume.save('/resume.pdf') 
         # Upload to S3
         s3 = boto3.client('s3', region_name=region)
         with open(resume_filename, 'rb') as resume_file:
