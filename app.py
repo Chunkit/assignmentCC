@@ -29,7 +29,10 @@ db_conn = connections.Connection(
 )
 output = {}
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1).lower() in ALLOWED_EXTENSIONS
+    # Get the file extension from the filename
+    _, file_extension = os.path.splitext(filename)
+    # Check if the file extension (without the dot) is in the allowed extensions set
+    return file_extension.lower()[1:] in ALLOWED_EXTENSIONS
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
