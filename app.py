@@ -1,9 +1,13 @@
+from flask_wtf.csrf import CSRFProtect, CSRFError
 from curses import flash
 from flask import Flask, render_template, request, redirect, flash, jsonify
 from pymysql import connections
 import os
 import boto3
 import botocore
+import pdfplumber
+# Use BytesIO to handle the binary content
+from io import BytesIO
 
 customhost = "internshipdb.c9euwctn4e9a.us-east-1.rds.amazonaws.com"
 customuser = "admin"
@@ -12,12 +16,21 @@ customdb = "internshipDB"
 custombucket = "bucket-internship"
 customregion = "us-east-1"
 
+# Define the resume file name
+resume_file_name = 'resume.pdf'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf'}
 
 app = Flask(__name__, static_folder='assets')
 
 bucket = custombucket
 region = customregion
+
+#encrypt
+csrf = CSRFProtect(app)
+app.config.update(dict(
+    SECRET_KEY="kwochunkit_secretkey",
+    WTF_CSRF_SECRET_KEY="a csrf secret key"
+))
 
 db_conn = connections.Connection(
     host=customhost,
@@ -56,6 +69,35 @@ def viewStudentInfoDetails(stud_id):
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_id,))
     result = cursor.fetchone() #Assuming there's only one student with the given ID
+            
+    return render_template('viewStudentInfoDetails.html', student=result)
+
+@app.route('/view_resume/<stud_id>')
+def view_resume(stud_id):
+    statement = "SELECT * FROM Student s WHERE stud_id = %s"
+    cursor = db_conn.cursor()
+    cursor.execute(statement, (stud_id,))
+    result = cursor.fetchone()
+
+    resume_key = "stud_id-" + str(stud_id) + "_pdf"
+
+    s3 = boto3.resource('s3')
+    try:
+        with BytesIO() as resume_buffer:
+            s3.download_fileobj(bucket_name, resume_key, resume_buffer)
+            resume_buffer.seek(0)
+
+        try:
+            # Return the PDF file
+            return send_file(
+                resume_buffer,
+                as_attachment=True,
+                attachment_filename="resume-" + str(stud_id) + "_pdf",
+                mimetype='application/pdf'
+            )
+                    
+        except Exception as e:
+            return str(e)
 
     return render_template('viewStudentInfoDetails.html', student=result)
 
@@ -105,7 +147,7 @@ def updateStudent():
         s3 = boto3.resource('s3')
 
         try:
-            print("Data inserted in MySQL RDS... uploading image to S3...")
+            print("Data inserted in MySQL RDS... uploading pdf to S3...")
             s3.Bucket(custombucket).put_object(Key=resume_in_s3,Body=resume,ContentType=resume.content_type)
 
             object_url = f"https://{custombucket}.s3.amazonaws.com/{resume_in_s3}"
