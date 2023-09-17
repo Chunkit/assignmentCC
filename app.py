@@ -148,8 +148,8 @@ def updateStudent():
 
         # Generate the object URL
         object_url = f"https://{custombucket}.s3.amazonaws.com/{resume_in_s3}"
-        statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, `group` = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = object_url WHERE stud_id = %s;"
-        cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, resume, stud_id))
+        statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, `group` = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = %s WHERE stud_id = %s;"
+        cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, object_url, stud_id))
         db_conn.commit()  # Commit the changes to the database
     except Exception as e:
         return str(e)
