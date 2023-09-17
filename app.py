@@ -10,7 +10,6 @@ import pdfplumber
 from io import BytesIO
 from flask import send_file
 from werkzeug.utils import secure_filename
-from models import DefaultResume
 
 customhost = "internshipdb.c9euwctn4e9a.us-east-1.rds.amazonaws.com"
 customuser = "admin"
@@ -101,43 +100,15 @@ def view_resume(stud_id):
         
     return render_template('viewStudentInfoDetails.html', student=result)
 
-def get_resume_from_s3(stud_id, default_resume):
-    s3 = boto3.client('s3', region_name=region)
-    resume_filename = "stud_id-" + str(stud_id) + "_pdf"
-
-    try:
-        response = s3.head_object(Bucket=bucket, Key=resume_filename)
-        content_length = response.get('ContentLength')
-        content_type = response.get('ContentType')
-        content_disposition = response.get('ContentDisposition')
-        return content_length, content_type, content_disposition
-    except botocore.exceptions.ClientError as e:
-        if e.response['Error']['Code'] == "404":
-            # Resume does not exist in S3, fetch the default resume from the database
-            return None, None, None
-        else:
-            raise
-
-def fetch_default_resume_from_database(stud_id):
-    default_resume = DefaultResume.query.filter_by(student_id=stud_id).first()
-    if default_resume:
-        return default_resume.resume_content
-    else:
-        return None
-
 @app.route('/editStudentInfoDetails/<stud_id>')
 def editStudent(stud_id):
+
     statement = "SELECT * FROM Student WHERE stud_id = %s"
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_id,))
     result = cursor.fetchone()
 
-    # Fetch the default resume content from your database based on stud_id
-    default_resume = fetch_default_resume_from_database(stud_id)  # Implement this function
-
-    content_length, content_type, content_disposition = get_resume_from_s3(stud_id, default_resume)
-
-    return render_template('editStudentInfoDetails.html', student=result, resume_info=(content_length, content_type, content_disposition))
+    return render_template('editStudentInfoDetails.html', student=result)
 
 @app.route('/updateStudent', methods=['POST','GET'])
 @csrf.exempt 
