@@ -346,21 +346,9 @@
 		    <!-- Assuming this is where you display the resume -->
 		    <div class="mt-10">
 		        <label for="myfile">Select files:</label>
-		        <input type="file" id="resume" name="resume" accept=".pdf" default="{{student[16] | safe}}"><br><br>
+		        <input type="file" id="resume" name="resume" accept=".pdf" default=""><br><br>
 		        <p><i>Accepted file format: PDF</i></p>
 		    </div>
-		
-		    {% if resume_info[0] is not none %}
-		        <!-- Resume exists in S3, display a link to it -->
-		        <div class="mt-10">
-		            <a href="/view_resume/{{ student[0] }}">View Resume</a>
-		        </div>
-		    {% elif resume_info[2] is not none %}
-		        <!-- ContentDisposition indicates default resume -->
-		        <div class="mt-10">
-		            <a href="/view_default_resume/{{ student[0] }}">View Default Resume</a>
-		        </div>
-		    {% endif %}
 	    
 	            <div class="mt-30" style="text-align: center;">
                     	<button type="submit" class="genric-btn success circle arrow">Save</button>
