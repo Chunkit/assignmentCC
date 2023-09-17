@@ -91,7 +91,7 @@ def updateStudent():
     if resume.filename == "":
         return "Please add a resume"
 
-    if  not allowed_file(resume.filename):
+    if not allowed_file(resume.filename):
         return "File type not allowed. Only PDFs are allowed."
 
     try:
