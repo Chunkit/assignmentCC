@@ -343,18 +343,24 @@
                         <input type="text" name="homePhone" placeholder="Your Homephone" required class="single-input" value="{{student[15]}}">
                     </div>
 
-                    <div class="mt-10">
-                        <label for="myfile">Select files:</label>
-                        <input type="file" id="resume" name="resume" accept=".pdf" default="{{student[16] | safe}}"><br><br>
-			<p><i>Accepted file format: PDF</i></p>
-			    # Modify your viewStudentInfoDetails.html template to include a link to view the resume
-			<!-- Add this code to your template -->
-			{% if resume_info %}
-    				<a href="{{ url_for('view_resume', stud_id=student[0]) }}">View Resume</a>
-			{% else %}
-    				No resume available
-			{% endif %}
-                    </div>
+		    <!-- Assuming this is where you display the resume -->
+		    <div class="mt-10">
+		        <label for="myfile">Select files:</label>
+		        <input type="file" id="resume" name="resume" accept=".pdf" default="{{student[16] | safe}}"><br><br>
+		        <p><i>Accepted file format: PDF</i></p>
+		    </div>
+		
+		    {% if resume_info[0] is not none %}
+		        <!-- Resume exists in S3, display a link to it -->
+		        <div class="mt-10">
+		            <a href="/view_resume/{{ student[0] }}">View Resume</a>
+		        </div>
+		    {% elif resume_info[2] is not none %}
+		        <!-- ContentDisposition indicates default resume -->
+		        <div class="mt-10">
+		            <a href="/view_default_resume/{{ student[0] }}">View Default Resume</a>
+		        </div>
+		    {% endif %}
 	    
 	            <div class="mt-30" style="text-align: center;">
                     	<button type="submit" class="genric-btn success circle arrow">Save</button>
