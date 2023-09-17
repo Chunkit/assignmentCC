@@ -10,6 +10,7 @@ import pdfplumber
 from io import BytesIO
 from flask import send_file
 from werkzeug.utils import secure_filename
+from models import DefaultResume
 
 customhost = "internshipdb.c9euwctn4e9a.us-east-1.rds.amazonaws.com"
 customuser = "admin"
@@ -117,7 +118,12 @@ def get_resume_from_s3(stud_id, default_resume):
         else:
             raise
 
-
+def fetch_default_resume_from_database(stud_id):
+    default_resume = DefaultResume.query.filter_by(student_id=stud_id).first()
+    if default_resume:
+        return default_resume.resume_content
+    else:
+        return None
 
 @app.route('/editStudentInfoDetails/<stud_id>')
 def editStudent(stud_id):
