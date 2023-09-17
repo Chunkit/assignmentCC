@@ -137,24 +137,22 @@ def updateStudent():
 
     if not allowed_file(resume.filename):
         return "File type not allowed. Only PDFs are allowed."
+        
+
+    resume_in_s3 = "stud_id-" + str(stud_id) + "_pdf"
+    s3 = boto3.resource('s3')
 
     try:
+        print("Data inserted in MySQL RDS... uploading pdf to S3...")
+        s3.Bucket(custombucket).put_object(Key=resume_in_s3, Body=resume, ContentType=resume.content_type)
+
+        # Generate the object URL
+        object_url = f"https://{custombucket}.s3.amazonaws.com/{resume_in_s3}"
+        statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, `group` = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = object_url WHERE stud_id = %s;"
         cursor.execute(statement, (ic, gender, programme, group, cgpa, password, intern_batch, ownTransport, currentAddress, contactNo, personalEmail, homeAddress, homePhone, resume, stud_id))
         db_conn.commit()  # Commit the changes to the database
-
-        resume_in_s3 = "stud_id-" + str(stud_id) + "_pdf"
-        s3 = boto3.resource('s3')
-
-        try:
-            print("Data inserted in MySQL RDS... uploading pdf to S3...")
-            s3.Bucket(custombucket).put_object(Key=resume_in_s3, Body=resume, ContentType=resume.content_type)
-
-            # Generate the object URL
-            object_url = f"https://{custombucket}.s3.amazonaws.com/{resume_in_s3}"
-            statement = "UPDATE Student SET ic = %s, gender = %s, programme = %s, `group` = %s, cgpa = %s, password = %s, intern_batch = %s, ownTransport = %s, currentAddress = %s, contactNo = %s, personalEmail = %s, homeAddress = %s , homePhone = %s, resume = object_url WHERE stud_id = %s;"
-            
-        except Exception as e:
-            return str(e)
+    except Exception as e:
+        return str(e)
             
     finally:
         cursor.close()
