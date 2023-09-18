@@ -47,10 +47,6 @@ def allowed_file(filename):
 def home():
     return render_template('supervisorMainPage.html')
 
-@app.route("/viewStudentInfoByCohort", methods=['GET'])
-def viewStudentInfoByCohort():
-    return render_template('viewStudentInfoByCohort.html')
-
 @app.route("/viewStudentInfo", methods=['GET'])
 def viewStudentInfo():
     statement = "SELECT s.* FROM Student s JOIN Student_List sl ON s.stud_id = sl.stud_id JOIN Supervisor sv ON sl.sv_id = sv.sv_id WHERE sl.sv_id = 1;"
